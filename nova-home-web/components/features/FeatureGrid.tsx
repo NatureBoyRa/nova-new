@@ -13,11 +13,11 @@ export function FeatureGrid() {
       />
 
       <ul className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature, i) => (
+        {features.map(({ icon: Icon, ...feature }, i) => (
           <li key={feature.title} className="list-none">
             <FeatureCard
               feature={feature}
-              icon={<feature.icon size={20} strokeWidth={1.75} aria-hidden="true" />}
+              icon={<Icon size={20} strokeWidth={1.75} aria-hidden="true" />}
               index={i}
             />
           </li>
