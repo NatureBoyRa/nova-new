@@ -1,1 +1,3 @@
-export default {} satisfies import("@opennextjs/cloudflare").OpenNextConfig;
+import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+
+export default defineCloudflareConfig();
