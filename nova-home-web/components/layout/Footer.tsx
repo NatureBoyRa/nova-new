@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Github, FileText, Mail, Shield } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { FaDiscord, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
-type FooterLink = { label: string; href: string; icon?: typeof FileText };
+type IconComponent = React.ComponentType<{ size?: number; className?: string }>;
+type FooterLink = { label: string; href: string; icon?: IconComponent; external?: boolean };
 
 const linkGroups: { title: string; links: FooterLink[] }[] = [
   {
@@ -22,12 +24,20 @@ const linkGroups: { title: string; links: FooterLink[] }[] = [
     ],
   },
   {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "#", icon: Shield },
-      { label: "Contact", href: "#", icon: Mail },
-    ],
-  },
+  title: "Legal",
+  links: [
+    { label: "Privacy Policy", href: "/privacy", icon: Shield },
+    { label: "Contact", href: "mailto:emailkamu@gmail.com", icon: Mail },
+  ],
+},
+{
+  title: "Community",
+  links: [
+    { label: "Discord", href: "https://discord.gg/kode-invite-kamu", icon: FaDiscord, external: true },
+    { label: "WhatsApp", href: "https://wa.me/62812xxxxxxx", icon: FaWhatsapp, external: true },
+    { label: "Instagram", href: "https://instagram.com/username_kamu", icon: FaInstagram, external: true },
+  ],
+},
 ];
 
 export function Footer() {
@@ -61,6 +71,8 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center gap-1.5 text-sm text-nova-textMuted transition-colors hover:text-nova-text"
                     >
                       {link.icon && <link.icon size={13} />}
